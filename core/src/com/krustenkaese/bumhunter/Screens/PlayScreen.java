@@ -62,9 +62,9 @@ public class PlayScreen implements Screen {
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
-        b2dr.SHAPE_STATIC.set(1,0,0,1);
 
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+
+        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -72,7 +72,7 @@ public class PlayScreen implements Screen {
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth()/ 2 , rect.getHeight() / 2); 
+            shape.setAsBox(rect.getWidth()/ 2 , rect.getHeight() / 2);
             fdef.shape = shape;
             body.createFixture(fdef);
 
@@ -105,7 +105,7 @@ public class PlayScreen implements Screen {
 
         gamecam.update();
         renderer.setView(gamecam);
-        b2dr.render(world, gamecam.combined);
+
     }
 
     @Override
@@ -116,6 +116,7 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
+        b2dr.render(world, gamecam.combined);
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
