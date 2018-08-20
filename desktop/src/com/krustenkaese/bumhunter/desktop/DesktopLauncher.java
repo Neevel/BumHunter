@@ -10,5 +10,6 @@ public class DesktopLauncher {
 		new LwjglApplication(new BumHunter(), config);
 		config.width = 998;
 		config.height = 615;
+		config.title = "BumHunter";
 	}
 }
