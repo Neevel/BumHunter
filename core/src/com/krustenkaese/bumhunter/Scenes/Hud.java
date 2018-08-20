@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.krustenkaese.bumhunter.BumHunter;
@@ -16,7 +17,7 @@ import com.krustenkaese.bumhunter.BumHunter;
 /**
  * Created by Krustenkäse on 19.08.2018
  */
-public class Hud {
+public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
@@ -72,5 +73,10 @@ public class Hud {
 
 
 
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }
