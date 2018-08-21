@@ -1,0 +1,26 @@
+
+hunter_and_enemy.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+1
+  rotate: false
+  xy: 1, 195
+  size: 864, 140
+  orig: 864, 140
+  offset: 0, 0
+  index: -1
+bum
+  rotate: false
+  xy: 1, 53
+  size: 530, 140
+  orig: 530, 140
+  offset: 0, 0
+  index: -1
+Coin
+  rotate: false
+  xy: 1, 1
+  size: 315, 50
+  orig: 315, 50
+  offset: 0, 0
+  index: -1
