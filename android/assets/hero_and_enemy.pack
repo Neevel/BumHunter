@@ -1,0 +1,33 @@
+
+hero_and_enemy.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Hero1
+  rotate: false
+  xy: 1, 285
+  size: 618, 140
+  orig: 618, 140
+  offset: 0, 0
+  index: -1
+Hero2
+  rotate: false
+  xy: 1, 143
+  size: 618, 140
+  orig: 618, 140
+  offset: 0, 0
+  index: -1
+Enemy
+  rotate: false
+  xy: 1, 1
+  size: 530, 140
+  orig: 530, 140
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 621, 375
+  size: 315, 50
+  orig: 315, 50
+  offset: 0, 0
+  index: -1
