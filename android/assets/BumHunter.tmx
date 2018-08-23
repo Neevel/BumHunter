@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="540" height="20" tilewidth="16" tileheight="16" infinite="0" nextobjectid="127">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="540" height="20" tilewidth="16" tileheight="16" infinite="0" nextobjectid="130">
  <tileset firstgid="1" source="Street-2D-Game-Backgrounds4.tsx"/>
  <tileset firstgid="5401" source="einkaufswagen-vektor-abbildung-bild_csp19197479.tsx"/>
  <layer name="Hintergrund" width="540" height="20">
@@ -17,6 +17,7 @@
   <object id="9" x="-8" y="-2" width="7" height="329"/>
   <object id="10" x="8638" y="0" width="7" height="326"/>
   <object id="11" x="-8" y="-6" width="8654" height="5"/>
+  <object id="127" x="261.125" y="-8.125" height="328.75"/>
  </objectgroup>
  <objectgroup name="einkaufwagen">
   <object id="12" x="762.667" y="288.667" width="36.3333" height="30.3333"/>

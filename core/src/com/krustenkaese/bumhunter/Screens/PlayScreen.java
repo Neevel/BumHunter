@@ -3,6 +3,8 @@ package com.krustenkaese.bumhunter.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
@@ -15,6 +17,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.krustenkaese.bumhunter.BumHunter;
 import com.krustenkaese.bumhunter.Scenes.Hud;
@@ -43,6 +48,8 @@ public class PlayScreen implements Screen {
 
     private Hunter player;
 
+    private Music music;
+
 
     public PlayScreen(BumHunter game){
         atlas = new TextureAtlas("hero_and_enemy.pack");
@@ -50,20 +57,26 @@ public class PlayScreen implements Screen {
         this.game = game;
 
         gamecam = new OrthographicCamera();
-        gameport = new FitViewport(BumHunter.V_WIDTH / BumHunter.PPM, BumHunter.V_HEIGHT / BumHunter.PPM, gamecam);
+        gameport = new StretchViewport(BumHunter.V_WIDTH / BumHunter.PPM, BumHunter.V_HEIGHT / BumHunter.PPM, gamecam);
         hud = new Hud(game.getBatch());
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("BumHunter.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / BumHunter.PPM);
-        gamecam.position.set(gameport.getWorldWidth() / 2, gameport.getWorldHeight() / 2, 0);
+        renderer = new OrthogonalTiledMapRenderer(map, 1f / BumHunter.PPM);
+        gamecam.position.set(gameport.getWorldWidth() / 2 , gameport.getWorldHeight() / 2, 0);
 
-        world = new World(new Vector2(0, -10), true);
+        world = new World(new Vector2(0, -12), true);
         b2dr = new Box2DDebugRenderer();
         new B2WorldCreator(world, map);
         player = new Hunter(world, this);
 
         world.setContactListener(new WorldContactListener());
+
+       // music = BumHunter.manager.get("audio/music/Suspense Loop.ogg", Music.class); // nimmt sich die richtige datei aus dem assetmanager
+       // music.setVolume(1f/5);
+       // music.setLooping(true); // wiederholungsschleife
+       // music.play();
+
     }
 
     public TextureAtlas getAtlas(){
@@ -77,8 +90,9 @@ public class PlayScreen implements Screen {
     public void handleInput(float dt){
         //if(player.b2body.getPosition().y <= (0.7f)){
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
-            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(),true);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+            BumHunter.manager.get("audio/sounds/jump.wav", Sound.class).play();
+            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(),true);}
         if(Gdx.input.isKeyPressed(Input.Keys.D)&& player.b2body.getLinearVelocity().x <= 2)
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
         if(Gdx.input.isKeyPressed(Input.Keys.A)&& player.b2body.getLinearVelocity().x >= -2)
@@ -142,7 +156,7 @@ public class PlayScreen implements Screen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        b2dr.dispose();
+       b2dr.dispose();
 
     }
 }

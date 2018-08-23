@@ -58,7 +58,7 @@ public class Hunter extends Sprite {
     }
 
     public void update(float dt){
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setPosition(b2body.getPosition().x - getWidth() / 2 , b2body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
     }
     public TextureRegion getFrame(float dt){
@@ -103,12 +103,12 @@ public class Hunter extends Sprite {
 
     public void defineHunter(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(90/ BumHunter.PPM, 32 / BumHunter.PPM);
+        bdef.position.set(90/ BumHunter.PPM + 2, 32 / BumHunter.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(15 / BumHunter.PPM, 40 / BumHunter.PPM); // bestimmt die Body Box größe
+        shape.setAsBox(10 / BumHunter.PPM, 35 / BumHunter.PPM); // bestimmt die Body Box größe
         fdef.filter.categoryBits = BumHunter.HUNTER_BIT;
         fdef.filter.maskBits = BumHunter.DEFAULT_BIT | BumHunter.COIN_BIT;
 
@@ -116,17 +116,13 @@ public class Hunter extends Sprite {
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
-        EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-15/ BumHunter.PPM, 50 / BumHunter.PPM), new Vector2(15/ BumHunter.PPM, 50 / BumHunter.PPM));
-        fdef.shape = head;
+        PolygonShape coinContact = new PolygonShape();
+        coinContact.setAsBox(15 / BumHunter.PPM, 45 / BumHunter.PPM);
+        fdef.shape = coinContact;
         fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData("head");
+        b2body.createFixture(fdef).setUserData("headAndSight");
 
-        EdgeShape rightSide = new EdgeShape();
-        rightSide.set(new Vector2(20/ BumHunter.PPM, -50 / BumHunter.PPM), new Vector2(20/ BumHunter.PPM, 40 / BumHunter.PPM));
-        fdef.shape = rightSide;
-        fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData("rightSide");
+
 
     }
 }

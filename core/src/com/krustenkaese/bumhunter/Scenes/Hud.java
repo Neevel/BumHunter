@@ -23,17 +23,18 @@ public class Hud implements Disposable{
 
 
 
-    private Integer score;
+
+    private static Integer score;
 
     private FreeTypeFontGenerator generator;
 
 
-    Label scoreLabel;
-    Label HellLabel;
-    Label levelPointLabel;
-    Label levelLabel;
-    Label hunterLabel;
-    Label hellPointLabel;
+    private static Label scoreLabel;
+    private Label HellLabel;
+    private Label levelPointLabel;
+    private Label levelLabel;
+    private Label hunterLabel;
+    private Label hellPointLabel;
 
     public Hud(SpriteBatch sb){
         generator = new FreeTypeFontGenerator(Gdx.files.internal("Down With The Sickness V2.ttf"));
@@ -58,7 +59,7 @@ public class Hud implements Disposable{
         HellLabel = new Label("HellLevel", new Label.LabelStyle(hudFont, Color.WHITE));
         levelPointLabel = new Label("1", new Label.LabelStyle(hudFont, Color.WHITE));
         levelLabel = new Label("Level", new Label.LabelStyle(hudFont, Color.WHITE));
-        hunterLabel = new Label("Bum Hunter", new Label.LabelStyle(hudFont, Color.WHITE));
+        hunterLabel = new Label("Hunter", new Label.LabelStyle(hudFont, Color.WHITE));
 
         table.add(hunterLabel).expandX().padTop(10);
         table.add(levelLabel).expandX().padTop(10);
@@ -78,5 +79,9 @@ public class Hud implements Disposable{
     @Override
     public void dispose() {
         stage.dispose();
+    }
+    public static void addScore(int value){
+        score += value;
+        scoreLabel.setText(String.format("score %06d", score));
     }
 }

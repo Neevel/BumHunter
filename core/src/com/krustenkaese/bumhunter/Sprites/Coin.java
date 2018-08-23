@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.krustenkaese.bumhunter.BumHunter;
+import com.krustenkaese.bumhunter.Scenes.Hud;
 
 /**
  * Created by Krustenkäse on 20.08.2018
@@ -23,11 +24,8 @@ public class Coin extends InteractiveTileObject{
     public void onHeadHit() {
         Gdx.app.log("Coin", "Collision");
         setCategoryFilter(BumHunter.DESTROYED_BIT);
+        Hud.addScore(200);
     }
 
-    @Override
-    public void onRightHit() {
-        Gdx.app.log("Coin", "Collision");
-        setCategoryFilter(BumHunter.DESTROYED_BIT);
-    }
+
 }
