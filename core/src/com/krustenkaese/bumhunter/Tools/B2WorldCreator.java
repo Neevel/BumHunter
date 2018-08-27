@@ -23,7 +23,7 @@ public class B2WorldCreator {
 
 
             //Boden Bodies / Fixture
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+       /* for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -55,5 +55,7 @@ public class B2WorldCreator {
 
             new Coin(world, map, rect);
         }
+        */
     }
+
 }

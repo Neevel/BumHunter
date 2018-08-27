@@ -50,7 +50,7 @@ public class Hunter extends Sprite {
         for(int i= 4; i < 6; i++)
             frames.add(new TextureRegion(getTexture(), i * 104, 280, 103, 140));
         hunterStand = new Animation<TextureRegion>(1f, frames);
-        setBounds(0, 0, 63 / BumHunter.PPM, 100 / BumHunter.PPM );   // die letzten beiden werte bestimmen die Bildgröße
+        setBounds(0, 0, 43 / BumHunter.PPM, 60 / BumHunter.PPM );   // die letzten beiden werte bestimmen die Bildgröße
 
 
 
@@ -67,7 +67,7 @@ public class Hunter extends Sprite {
         TextureRegion region;
         switch (currentState){
             case JUMPING:
-                region = hunterJump.getKeyFrame(stateTimer, true);
+                region = hunterRun.getKeyFrame(stateTimer, true);
                 break;
             case RUNNING:
                 region = hunterRun.getKeyFrame(stateTimer, true);
@@ -95,7 +95,7 @@ public class Hunter extends Sprite {
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;
-        else if(b2body.getLinearVelocity().x != 0)
+        else if(b2body.getLinearVelocity().x != 0 || b2body.getLinearVelocity().y != 0)
             return State.RUNNING;
         else
             return State.STANDING;
@@ -103,12 +103,12 @@ public class Hunter extends Sprite {
 
     public void defineHunter(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(90/ BumHunter.PPM + 2, 32 / BumHunter.PPM);
+        bdef.position.set(100/ BumHunter.PPM + 2, 290 / BumHunter.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10 / BumHunter.PPM, 35 / BumHunter.PPM); // bestimmt die Body Box größe
+        shape.setAsBox(5 / BumHunter.PPM, 15 / BumHunter.PPM); // bestimmt die Body Box größe
         fdef.filter.categoryBits = BumHunter.HUNTER_BIT;
         fdef.filter.maskBits = BumHunter.DEFAULT_BIT | BumHunter.COIN_BIT;
 
@@ -117,7 +117,7 @@ public class Hunter extends Sprite {
         b2body.createFixture(fdef);
 
         PolygonShape coinContact = new PolygonShape();
-        coinContact.setAsBox(15 / BumHunter.PPM, 45 / BumHunter.PPM);
+        coinContact.setAsBox(05 / BumHunter.PPM, 20 / BumHunter.PPM);
         fdef.shape = coinContact;
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData("headAndSight");
